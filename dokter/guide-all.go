@@ -15,7 +15,7 @@ type GuideAllReturn struct {
 	Created string `json:"created"`
 }
 
-func GuideAll(c *gin.Context) {
+func DokterGuide(c *gin.Context) {
 	result := []GuideAllReturn{}
 
 	db, err := common.DbConn()

@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"mobdev.com/common"
+
 	dkt "mobdev.com/dokter"
 )
 
@@ -15,6 +16,7 @@ func main() {
 
 	// For Endpoints That Doesn't Need Authorization
 	r.POST("/dokter/auth", dkt.DokterAuth)
+	r.POST("/dokter/guide", dkt.DokterGuide)
 
 	// For Endpoints That Need Authorization
 	authorized := r.Group("/")

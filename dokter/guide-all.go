@@ -49,6 +49,7 @@ func DokterGuide(c *gin.Context) {
 	for rows.Next() {
 		data := GuideAllReturn{}
 		err = rows.Scan(&data.Id, &data.Title, &data.Logo, &data.Created)
+		data.Logo = common.GetObjectURL() + data.Logo
 		if err != nil {
 			log.Print("db access error : " + err.Error())
 			c.JSON(http.StatusInternalServerError, gin.H{

@@ -1,12 +1,15 @@
 package main
 
 import (
+	"log"
+
 	"github.com/gin-gonic/gin"
 	"mobdev.com/common"
 	dkt "mobdev.com/dokter"
 )
 
 func main() {
+	log.Print(common.GetDBURL())
 	r := gin.Default()
 	r.Use(common.CORSMiddleware())
 

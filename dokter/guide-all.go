@@ -11,6 +11,7 @@ import (
 type GuideAllReturn struct {
 	Id      string `json:"id"`
 	Title   string `json:"title"`
+	Desc    string `json:"desc"`
 	Logo    string `json:"logo"`
 	Created string `json:"created"`
 }
@@ -33,6 +34,7 @@ func DokterGuide(c *gin.Context) {
 		SELECT 
 			guide_id,
 			guide_title,
+			guide_desc,
 			guide_logo,
 			created_dt
 		FROM public.guide
@@ -48,7 +50,7 @@ func DokterGuide(c *gin.Context) {
 
 	for rows.Next() {
 		data := GuideAllReturn{}
-		err = rows.Scan(&data.Id, &data.Title, &data.Logo, &data.Created)
+		err = rows.Scan(&data.Id, &data.Title, &data.Desc, &data.Logo, &data.Created)
 		data.Logo = common.GetObjectURL() + data.Logo
 		if err != nil {
 			log.Print("db access error : " + err.Error())

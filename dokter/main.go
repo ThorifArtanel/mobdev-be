@@ -6,11 +6,11 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	common "mobdev.com/common"
+	"mobdev.com/common"
 )
 
 type Auth struct {
-	Username string `json:"username"`
+	Email    string `json:"email"`
 	Password string `json:"password"`
 }
 
@@ -41,15 +41,15 @@ func DokterAuth(c *gin.Context) {
 	var pw string
 	var raw_token common.Token
 	Q := `
-		SELECT
-			u.user_id,
-			u.user_nama,
-			u.group_id,
-			u.password
-		FROM user_cms u
-		WHERE LOWER(u.user_id)=LOWER($1);
+		SELECT 
+			dkt.dkt_id,
+			dkt.dkt_name,
+			dkt.dkt_password
+		FROM public.user_dokter dkt
+		WHERE dkt_email=$1;
 	`
-	err = db.QueryRow(Q, req.Username).Scan(&raw_token.Id, &raw_token.UserName, &raw_token.UserGroup, &pw)
+	err = db.QueryRow(Q, req.Email).Scan(&raw_token.Id, &raw_token.UserName, &pw)
+	raw_token.UserGroup = "Dokter"
 	switch {
 	case err == sql.ErrNoRows:
 		if err != nil {

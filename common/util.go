@@ -3,11 +3,11 @@ package common
 import (
 	"time"
 
-	guuid "github.com/google/uuid"
+	"github.com/google/uuid"
 )
 
 func GenerateUUID() string {
-	id := guuid.New()
+	id := uuid.New()
 
 	return id.String()
 }

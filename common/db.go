@@ -3,6 +3,8 @@ package common
 import (
 	"database/sql"
 	"fmt"
+
+	_ "github.com/jackc/pgx/v5/stdlib"
 )
 
 func DbConn() (*sql.DB, error) {

@@ -8,7 +8,7 @@ import (
 	"mobdev.com/common"
 )
 
-type GuideAllReturn struct {
+type DokterGuideAllReturn struct {
 	Id      string `json:"id"`
 	Title   string `json:"title"`
 	Desc    string `json:"desc"`
@@ -16,8 +16,17 @@ type GuideAllReturn struct {
 	Created string `json:"created"`
 }
 
-func DokterGuide(c *gin.Context) {
-	result := []GuideAllReturn{}
+func DokterGuideAll(c *gin.Context) {
+	token := c.MustGet("Token").(*common.Token)
+	if token.UserGroup != common.DokterRole() {
+		log.Print("invalid role")
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"status": http.StatusUnauthorized,
+			"msg":    "Invalid Role"})
+		return
+	}
+
+	result := []DokterGuideAllReturn{}
 
 	db, err := common.DbConn()
 	if err != nil {
@@ -49,7 +58,7 @@ func DokterGuide(c *gin.Context) {
 	}
 
 	for rows.Next() {
-		data := GuideAllReturn{}
+		data := DokterGuideAllReturn{}
 		err = rows.Scan(&data.Id, &data.Title, &data.Desc, &data.Logo, &data.Created)
 		data.Logo = common.GetObjectURL() + data.Logo
 		if err != nil {

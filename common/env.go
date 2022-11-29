@@ -23,3 +23,11 @@ func GetTokenSecret() string {
 func GetDBURL() string {
 	return os.Getenv("DATABASE_URL")
 }
+
+func GetDescTruncLen() int {
+	return 25
+}
+
+func DokterRole() string {
+	return "DOKTER"
+}

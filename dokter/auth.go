@@ -49,7 +49,7 @@ func DokterAuth(c *gin.Context) {
 		WHERE dkt_email=$1;
 	`
 	err = db.QueryRow(Q, req.Email).Scan(&raw_token.Id, &raw_token.UserName, &pw)
-	raw_token.UserGroup = "Dokter"
+	raw_token.UserGroup = common.DokterRole()
 	switch {
 	case err == sql.ErrNoRows:
 		if err != nil {

@@ -2,6 +2,7 @@ package common
 
 import (
 	"time"
+	"unicode"
 
 	"github.com/google/uuid"
 )
@@ -32,4 +33,24 @@ func TimeTo(t time.Time, name string) time.Time {
 		panic(err)
 	}
 	return t.In(loc)
+}
+
+func TruncateToLength(s string, max int) string {
+	lastSpaceIx := -1
+	len := 0
+	for i, r := range s {
+		if unicode.IsSpace(r) {
+			lastSpaceIx = i
+		}
+		len++
+		if len >= max {
+			if lastSpaceIx != -1 {
+				return s[:lastSpaceIx] + "..."
+			}
+
+			break
+		}
+	}
+
+	return s
 }

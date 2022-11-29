@@ -16,7 +16,13 @@ func main() {
 
 	// For Endpoints That Doesn't Need Authorization
 	r.POST("/dokter/auth", dkt.DokterAuth)
-	r.GET("/dokter/guide", dkt.DokterGuide)
+
+	r.GET("/dokter/:id", dkt.DokterOne)
+	r.PUT("/dokter/:id", dkt.DokterUpdate)
+	r.POST("/dokter", dkt.DokterInsert)
+
+	r.GET("/dokter/guide", dkt.DokterGuideAll)
+	r.POST("/dokter/guide", dkt.DokterGuideInsert)
 
 	// For Endpoints That Need Authorization
 	authorized := r.Group("/")

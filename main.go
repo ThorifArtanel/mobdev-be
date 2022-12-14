@@ -23,7 +23,7 @@ func main() {
 	r.POST("/dokter/guide", dkt.DokterGuideInsert)
 
 	// Keluarga Endpoints
-	r.POST("/dokter/auth", klg.KeluargaAuth)
+	r.POST("/keluarga/auth", klg.KeluargaAuth)
 
 	r.GET("/keluarga/guide", klg.KeluargaGuideAll)
 	r.POST("/keluarga/guide", klg.KeluargaGuideInsert)

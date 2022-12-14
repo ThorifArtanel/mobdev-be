@@ -31,3 +31,7 @@ func GetDescTruncLen() int {
 func DokterRole() string {
 	return "DOKTER"
 }
+
+func KeluargaRole() string {
+	return "KELUARGA"
+}

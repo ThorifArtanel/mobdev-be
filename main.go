@@ -1,20 +1,18 @@
 package main
 
 import (
-	"log"
-
 	"github.com/gin-gonic/gin"
 	"mobdev.com/common"
 
 	dkt "mobdev.com/dokter"
+	klg "mobdev.com/keluarga"
 )
 
 func main() {
-	log.Print(common.GetDBURL())
 	r := gin.Default()
 	r.Use(common.CORSMiddleware())
 
-	// For Endpoints That Doesn't Need Authorization
+	// Doctor Endpoints
 	r.POST("/dokter/auth", dkt.DokterAuth)
 
 	r.GET("/dokter/:id", dkt.DokterOne)
@@ -24,12 +22,13 @@ func main() {
 	r.GET("/dokter/guide", dkt.DokterGuideAll)
 	r.POST("/dokter/guide", dkt.DokterGuideInsert)
 
-	// For Endpoints That Need Authorization
-	authorized := r.Group("/")
-	{
-		authorized.Use(common.AuthMiddleware())
-		// authorized.GET("/cms/user", UserAll)
-	}
+	// Keluarga Endpoints
+	r.POST("/dokter/auth", klg.KeluargaAuth)
+
+	r.GET("/keluarga/guide", klg.KeluargaGuideAll)
+	r.POST("/keluarga/guide", klg.KeluargaGuideInsert)
+
+	authed := r.R
 
 	r.Run(":80")
 }

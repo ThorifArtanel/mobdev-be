@@ -1,4 +1,4 @@
-package dokter
+package keluarga
 
 import (
 	"fmt"
@@ -13,15 +13,15 @@ import (
 	"mobdev.com/common"
 )
 
-type DokterGuideInsertReq struct {
+type KeluargaGuideInsertReq struct {
 	Title   string `json:"title" validate:"required"`
 	Subject string `json:"subject" validate:"required,AlphaSpace"`
 	Content string `json:"content" validate:"required"`
 }
 
-func DokterGuideInsert(c *gin.Context) {
+func KeluargaGuideInsert(c *gin.Context) {
 	log.Print("Parsing Payload")
-	var req DokterGuideInsertReq
+	var req KeluargaGuideInsertReq
 	if err := c.Bind(&req); err != nil {
 		log.Print(err)
 		c.JSON(http.StatusInternalServerError, gin.H{

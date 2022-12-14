@@ -1,4 +1,4 @@
-package dokter
+package keluarga
 
 import (
 	"log"
@@ -8,7 +8,7 @@ import (
 	"mobdev.com/common"
 )
 
-type DokterGuideAllReturn struct {
+type KeluargaGuideAllReturn struct {
 	Id      string `json:"id"`
 	Title   string `json:"title"`
 	Desc    string `json:"desc"`
@@ -16,8 +16,8 @@ type DokterGuideAllReturn struct {
 	Created string `json:"created"`
 }
 
-func DokterGuideAll(c *gin.Context) {
-	result := []DokterGuideAllReturn{}
+func KeluargaGuideAll(c *gin.Context) {
+	result := []KeluargaGuideAllReturn{}
 
 	db, err := common.DbConn()
 	if err != nil {
@@ -49,7 +49,7 @@ func DokterGuideAll(c *gin.Context) {
 	}
 
 	for rows.Next() {
-		data := DokterGuideAllReturn{}
+		data := KeluargaGuideAllReturn{}
 		err = rows.Scan(&data.Id, &data.Title, &data.Desc, &data.Logo, &data.Created)
 		data.Logo = common.GetObjectURL() + data.Logo
 		if err != nil {

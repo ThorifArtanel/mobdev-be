@@ -28,7 +28,5 @@ func main() {
 	r.GET("/keluarga/guide", klg.KeluargaGuideAll)
 	r.POST("/keluarga/guide", klg.KeluargaGuideInsert)
 
-	authed := r.R
-
 	r.Run(":80")
 }
